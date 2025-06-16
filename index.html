@@ -37,6 +37,10 @@
     button:hover {
       background-color: #218838;
     }
+    button:disabled {
+      background-color: #6c757d;
+      cursor: default;
+    }
   </style>
 
   <!-- Meta Pixel Code -->
@@ -67,11 +71,18 @@
 
   <script>
     function confirmarCompra() {
+      // Envia evento de compra para o Pixel
       fbq('track', 'Purchase', {
         value: 1.00,
         currency: 'BRL'
       });
 
+      // Feedback visual no botão
+      const botao = document.querySelector("button");
+      botao.textContent = "Redirecionando...";
+      botao.disabled = true;
+
+      // Redirecionamento após 0,5s
       setTimeout(function () {
         window.location.href = "https://wa.me/5531984298702?text=Olá%2C+finalizei+a+confirmação+agora+✅";
       }, 500);
